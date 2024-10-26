@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white w-full fixed bottom-0 left-0 h-20 flex items-center justify-center">
+  <div class="bg-white w-full fixed z-20 bottom-0 left-0 h-20 flex items-center justify-center">
     <div class="absolute w-full h-2 bg-gradient-to-t from-gray-300 to-transparent -top-2"></div>
     <div class="w-full max-w-[570px] mx-auto flex items-center justify-center gap-4">
       <Button :active="isActive" :bgColor="'bg-rose-600'" :bgHoverColor="'bg-red-700'" :bgInactiveColor="'bg-gray-400'" class="min-w-[150px] lg:min-w-[275px]">
