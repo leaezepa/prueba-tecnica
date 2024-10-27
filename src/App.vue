@@ -1,8 +1,11 @@
 <template>
   <main class="relative bg-gray-100 h-full w-full min-h-screen md:flex items-center justify-center">
-    <RouterView/>
+    <SuspenseComponent>
+      <RouterView/>
+    </SuspenseComponent>
   </main>
 </template>
 
 <script setup>
+import SuspenseComponent from '@/components/SuspenseComponent.vue'
 </script>

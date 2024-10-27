@@ -29,6 +29,22 @@ export const usePokeStore = defineStore({
           console.log(error);
         });
       },
+      addPokeToFavorites(poke){
+        let isInArray = this.favorites.find((e) => e?.name === poke?.name);
+        let pokeObj = {name: poke?.name, url: poke?.url ?? `https://pokeapi.co/api/v2/pokemon/${poke?.id}`}
+        if(isInArray){
+          this.favorites = this.favorites.filter(e => e?.name !== poke?.name);
+        }else{
+          this.favorites.push(pokeObj);
+          this.favorites.sort((a, b) => {
+            // POR CADA ENTRADA DE FAVORITES VEMOS SUS URL, HACEMOS UN SPLIT PARA SEPARAR TODOS LOS VALORES QUE ESTEN ENTRE /
+            // LUEGO FILTRAMOS LOS VALORES DE STRING VACIOS Y RETORNAMOS EL ULTIMO VALOR CON POP
+            const idA = parseInt(a.url.split('/').filter(Boolean).pop());
+            const idB = parseInt(b.url.split('/').filter(Boolean).pop());
+            return idA - idB;
+          });
+        }
+      },
       searchPokemon(array, left, right, objetive){
         // cambiamos el objetivo que se está buscando a minuscula para que la api lo tome bien
         let search = this.changeTextToLowerCase(objetive)
@@ -47,11 +63,9 @@ export const usePokeStore = defineStore({
             return true;
           }
           if (this.changeTextToLowerCase(array[mid]?.name) > search) {
-            //de lo contrario, si el name está en un lugar mayor en el index comparado con el valor buscado, volvemos a iterar con un nro menos
             // VOLVEMOS A BUSCAR EN EL ARRAY DE LA MITAD MENOS 1. A LA IZQUIERDA
             return this.searchPokemon(array, left, mid - 1, search);
           }
-          //si el name está en un lugar menor, volvemos a iterar con un nro más
           // vOLVEMOS A BUSCAR EN LA MITAD MAS 1 DEL LADO DERECHO DEL ARRAY
           return this.searchPokemon(array, mid + 1, right, search);
         }
