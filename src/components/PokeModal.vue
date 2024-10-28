@@ -82,7 +82,7 @@
               <div class="flex items-center justify-between mt-2">
                 <ButtonAll
                   :bgColor="'bg-rose-600'"
-                  class="text-white font-bold w-[195px] overflow-hidden"
+                  class="text-white font-bold w-[195px] overflow-hidden hover:bg-red-700"
                   @click="copyToClipboard"
                 >
                   <Transition mode="out-in" name="slide">
