@@ -12,7 +12,7 @@ export const usePokeStore = defineStore({
     }),
     actions:{
       async getAllPokemon(){
-        let ALL_POKE_URL = 'https://pokeapi.co/api/v2/pokemon?limit=1000';
+        let ALL_POKE_URL = 'https://pokeapi.co/api/v2/pokemon?limit=50';
         await axios.get(ALL_POKE_URL).then(response => {
             this.pokemon = response.data;
             this.pokemonList = response.data?.results;
@@ -29,20 +29,23 @@ export const usePokeStore = defineStore({
           console.log(error);
         });
       },
-      addPokeToFavorites(poke){
-        let isInArray = this.favorites.find((e) => e?.name === poke?.name);
-        let pokeObj = {name: poke?.name, url: poke?.url ?? `https://pokeapi.co/api/v2/pokemon/${poke?.id}`}
-        if(isInArray){
-          this.favorites = this.favorites.filter(e => e?.name !== poke?.name);
+      addPokeToFavorites(poke, index, idPoke){
+        let isInArray = this.favorites.findIndex((e) => e?.name === poke?.name);
+        let pokeObj = {name: poke?.name, url: poke?.url ?? `https://pokeapi.co/api/v2/pokemon/${poke?.id}`, favorite:idPoke, idx:idPoke-1};
+        if(isInArray >= 0){
+          let newObj = {name:pokeObj?.name, url: pokeObj?.url, idx:idPoke-1}
+          this.pokemon.results?.splice(index, 1, newObj);
+          this.pokemonList?.splice(idPoke-1, 1, newObj);
+          this.favorites.splice(isInArray,1);
+          return true;
         }else{
+          this.pokemon.results?.splice(index, 1, pokeObj);
+          this.pokemonList?.splice(idPoke-1, 1, pokeObj);
           this.favorites.push(pokeObj);
           this.favorites.sort((a, b) => {
-            // POR CADA ENTRADA DE FAVORITES VEMOS SUS URL, HACEMOS UN SPLIT PARA SEPARAR TODOS LOS VALORES QUE ESTEN ENTRE /
-            // LUEGO FILTRAMOS LOS VALORES DE STRING VACIOS Y RETORNAMOS EL ULTIMO VALOR CON POP
-            const idA = parseInt(a.url.split('/').filter(Boolean).pop());
-            const idB = parseInt(b.url.split('/').filter(Boolean).pop());
-            return idA - idB;
+            return a?.favorite - b?.favorite;
           });
+          return false
         }
       },
       searchPokemon(array, left, right, objetive){

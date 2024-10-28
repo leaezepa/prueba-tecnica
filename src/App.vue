@@ -1,8 +1,6 @@
 <template>
   <main class="relative bg-gray-100 h-full w-full min-h-screen md:flex items-center justify-center">
-    <SuspenseComponent>
-      <RouterView/>
-    </SuspenseComponent>
+    <RouterView/>
   </main>
 </template>
 

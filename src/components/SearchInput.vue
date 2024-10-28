@@ -33,9 +33,13 @@ const quickSort = (arr, key)=> {
     //si el elemento [i] del array con nombre [key] es menor a pivot[nombre]
     if (arr[i][key] < pivot[key]) {
       // se pushea ese nombre en el primer array
+      Object.assign(arr[i],{idx:arr[i]?.url.split('/')[6]-1})
+
       left.push(arr[i]);
     } else {
       //sino al segundo
+      Object.assign(arr[i],{idx:arr[i]?.url.split('/')[6]-1})
+
       right.push(arr[i]);
     }
   }
