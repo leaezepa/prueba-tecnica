@@ -43,11 +43,22 @@ const { favorites } = storeToRefs(pokeStore)
 const isActiveList = ref(true)
 const isActiveFavs = ref(false)
 
-watch(favorites?.value, () => {
+const scrollToTop = (val)=>{
+  if(val){
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+}
+watch(favorites.value, () => {
   if (favorites.value?.length === 0) {
     isActiveFavs.value = false
     isActiveList.value = true
   }
+})
+watch(isActiveFavs,(val)=>{
+  scrollToTop(val)
+})
+watch(isActiveList,(val)=>{
+  scrollToTop(val)
 })
 defineExpose({ isActiveList, isActiveFavs })
 </script>
