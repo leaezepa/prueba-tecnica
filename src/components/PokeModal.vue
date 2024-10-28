@@ -118,10 +118,9 @@
 </style>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { defineAsyncComponent, ref, watch } from 'vue'
 import { usePokeStore } from '@/stores/pokemon.store.js'
 import ButtonAll from './ButtonAll.vue'
-import ButtonStar from './ButtonStar.vue'
 import { storeToRefs } from 'pinia'
 const emit = defineEmits(['close', 'changeLocation'])
 const props = defineProps({
@@ -131,19 +130,18 @@ const props = defineProps({
   favorited: Boolean,
   location: Boolean,
 })
+const ButtonStar = defineAsyncComponent(()=>import( '@/components/ButtonStar.vue'));
 const pokeStore = usePokeStore()
 const { pokemon } = storeToRefs(pokeStore)
 const showModal = ref(false)
-const added = ref(false)
+const added = ref(props.favorited)
 const removedFromFavs = ref(false)
 const copied = ref(false)
 
 const closeModal = () => {
   showModal.value = false
+  added.value = false
   emit('close')
-  setTimeout(()=>{
-    added.value = false
-  },200)
 }
 const addToFavs = poke => {
   removedFromFavs.value = pokeStore.addPokeToFavorites(
