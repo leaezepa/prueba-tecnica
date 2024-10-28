@@ -1,6 +1,6 @@
 <template>
   <button
-    :class="`${disabled ? '' : 'cursor-pointer'} rounded-full px-5 py-[11px] h-11 flex items-center justify-center gap-2 ${bgColor} ${active ? 'hover:bg-red-700' : ''}`"
+    :class="`${disabled ? '' : 'cursor-pointer'} rounded-full px-5 py-[11px] h-11 flex items-center justify-center gap-2 ${bgColor}`"
     :disabled="disabled"
   >
     <slot></slot>
