@@ -79,8 +79,12 @@ export const usePokeStore = defineStore({
       changeTextToLowerCase(text) {
         return text.toLowerCase();
       },
-      resetPokemonList(){
-        this.pokemon = { results: this.pokemonList }
+      async resetPokemonList(){
+        if(this.pokemonList?.length > 1){
+          this.pokemon = { results: this.pokemonList }
+        } else{
+          await this.getAllPokemon()
+        }
         this.notFound = false;
       }
     }
