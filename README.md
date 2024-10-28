@@ -1,35 +1,35 @@
-# prueba-global66
+# Aplicación de Pokemones
 
-This template should help get you started developing with Vue 3 in Vite.
+Esta aplicación fue desarrollada con **Vue.js 3** y está diseñada para buscar y visualizar listados de pokemones, utilizando diversos recursos para optimizar la experiencia de usuario.
 
-## Recommended IDE Setup
+## Tecnologías Utilizadas
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- **Vue Router 4**: Para el enrutado de las páginas `/` y `/list`.
+- **Pinia**: Gestión del estado de la aplicación, incluyendo los listados de pokemones y los pokemones favoritos.
+- **Iconify para Vue**: Biblioteca de iconos utilizada para implementar los elementos visuales detallados en el diseño de Figma.
+- **Tailwind CSS**: Estilos y maquetación de la aplicación.
+- **PokeAPI v2**: API utilizada para obtener la información de los pokemones.
 
-## Customize configuration
+## Características
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+- **Búsqueda optimizada**: La PokeAPI no cuenta con un parámetro específico para buscar pokemones, por lo que se implementó un algoritmo que permite realizar búsquedas en grandes volúmenes de datos de manera eficiente, minimizando el uso de recursos del navegador.
+- **Componentes reutilizables**: La aplicación está estructurada en componentes reutilizables para facilitar la escalabilidad y la claridad del código.
+- **Carga asíncrona de componentes**: Se utilizó `defineAsyncComponent` para mejorar el rendimiento, cargando únicamente los componentes necesarios en cada vista.
 
-## Project Setup
+## Instrucciones de instalación
 
-```sh
-npm install
-```
+1. Clonar el repositorio:
+   ```bash
+   git clone https://github.com/leaezepa/prueba-tecnica.git
+   ```
 
-### Compile and Hot-Reload for Development
+2. Instalar las dependencias:
+   ```bash
+   npm install
+   ```
 
-```sh
-npm run dev
-```
+3. Iniciar el entorno de desarrollo:
+   ```bash
+   npm run dev
+   ```
 
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
